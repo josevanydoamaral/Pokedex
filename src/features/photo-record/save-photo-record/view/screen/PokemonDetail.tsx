@@ -10,12 +10,17 @@ import PhotoSection from "../components/PhotoSection";
 import {StaticScreenProps} from "@react-navigation/native";
 import {Pokemon} from "../../../../../shared/models/Pokemon";
 import {savePhotoRecordUsecase} from "../../../composition/PhotoRecordContainer";
+import {PhotoRecord} from "../../../../../shared/models/PhotoRecord";
 
 type Props = StaticScreenProps<{
-    pokemon: Pokemon
+    pokemon: Pokemon,
+    photoRecordUri?: string,
 }>
 
 const PokemonDetail = ({ route }: Props) => {
+
+    const isReadOnly = Boolean(route.params.photoRecordUri);
+
 
     const { pokemon } = route.params;
 
@@ -40,7 +45,7 @@ const PokemonDetail = ({ route }: Props) => {
             <ScrollView contentContainerStyle={styles.container}>
                 <Profile pokemon={pokemon} />
 
-                <PhotoSection takePhoto={takePhoto} capturedPhotoUri={capturedPhotoUri} />
+                <PhotoSection takePhoto={takePhoto} capturedPhotoUri={route.params.photoRecordUri ?? capturedPhotoUri} />
 
             </ScrollView>
 
@@ -52,18 +57,21 @@ const PokemonDetail = ({ route }: Props) => {
                 <Text>{successMessage}</Text>
             )}
 
-            <View style={styles.actionSection}>
-                <TouchableOpacity
-                    disabled={isLoading}
-                    style={styles.favoriteButton}
-                    onPress={() => handleSavePhotoRecord(pokemon)}>
-                    <Text style={styles.favoriteButtonText}>Favoritar</Text>
-                </TouchableOpacity>
+            { !isReadOnly && (
+                <View style={styles.actionSection}>
+                    <TouchableOpacity
+                        disabled={isLoading}
+                        style={styles.favoriteButton}
+                        onPress={() => handleSavePhotoRecord(pokemon)}>
+                        <Text style={styles.favoriteButtonText}>Favoritar</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.deleteButton}>
-                    <Text style={styles.deleteButtonText}>Excluir</Text>
-                </TouchableOpacity>
-            </View>
+                    <TouchableOpacity style={styles.deleteButton}>
+                        <Text style={styles.deleteButtonText}>Excluir</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
+
 
             <Text style={[styles.textPage, { paddingBottom: insets.bottom}]}>Detalhes</Text>
         </View>

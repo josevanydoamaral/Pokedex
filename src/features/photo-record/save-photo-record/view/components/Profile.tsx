@@ -4,7 +4,7 @@ import {spacing} from "../../../../../theme/spacing";
 import {typography} from "../../../../../theme/typography";
 import {Pokemon} from "../../../../../shared/models/Pokemon";
 import Badge from "../../../../../components/Badge";
-import {cmToM} from "../../../../../utils/utils";
+import {dmToM} from "../../../../../utils/utils";
 
 type PokemonProps = {
     pokemon: Pokemon

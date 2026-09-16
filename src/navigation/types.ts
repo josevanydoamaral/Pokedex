@@ -6,7 +6,8 @@ import {createStaticNavigation} from "@react-navigation/native";
 import {colors} from "../theme/colors";
 
 export type RecordDetailsScreenProps = {
-    pokemon: Pokemon
+    pokemon?: Pokemon,
+    photoRecordId?: string
 }
 
 const RootStack = createNativeStackNavigator({

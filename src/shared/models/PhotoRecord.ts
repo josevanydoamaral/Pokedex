@@ -1,6 +1,6 @@
 import { Pokemon } from "./Pokemon";
 
-export type Status = 'pending' | 'synced';
+export type Status = 'pending' | 'syncing' | 'synced' | 'error';
 
 
 export interface PhotoRecord {

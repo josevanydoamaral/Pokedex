@@ -6,10 +6,10 @@ import {ArrowRight, Heart} from "lucide-react-native";
 import Badge from "../../../../../components/Badge";
 import {Kind, Pokemon} from "../../../../../shared/models/Pokemon";
 import {useNavigation} from "@react-navigation/native";
+import {PhotoRecord} from "../../../../../shared/models/PhotoRecord";
 
 interface CardProps {
     pokemon: Pokemon;
-
 }
 
 const FavCard = ({ pokemon }: CardProps) => {

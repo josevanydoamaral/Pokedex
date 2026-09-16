@@ -1,7 +1,7 @@
 import {IPokemonRepository} from "../contracts/IPokemonRepository";
 import {Kind, Pokemon} from "../../models/Pokemon";
 import {IPokemonApiResponse} from "./dtos/IPokemonApiResponse";
-import {cmToM, gToKg} from "../../../utils/utils";
+import {dmToM, hgToKg} from "../../../utils/utils";
 
 export class PokemonApiRepository implements IPokemonRepository {
     async findPokemon(searchTerm: string): Promise<Pokemon | null> {
@@ -25,8 +25,8 @@ export class PokemonApiRepository implements IPokemonRepository {
         return {
             id: responseJson.id,
             name: responseJson.name,
-            height: cmToM(responseJson.height),
-            weight: gToKg(responseJson.weight),
+            height: dmToM(responseJson.height),
+            weight: hgToKg(responseJson.weight),
             kinds: kinds,
             spriteUrl: responseJson.sprites.front_default ?? "",
         }
