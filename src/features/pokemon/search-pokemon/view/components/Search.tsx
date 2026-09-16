@@ -5,13 +5,15 @@ import {typography} from "../../../../../theme/typography";
 import {SearchIcon} from "lucide-react-native";
 
 interface SearchProps {
+    hasOfflineSearchFailed: boolean;
+    isConnected: boolean;
     searchTerm: string,
     setSearchTerm: (searchTerm: string) => void,
     handleSearch: (searchTerm: string) => void,
     loading: boolean,
 }
 
-const Search = ({ searchTerm, setSearchTerm, handleSearch, loading } : SearchProps) => {
+const Search = ({ searchTerm, setSearchTerm, handleSearch, loading, hasOfflineSearchFailed, isConnected } : SearchProps) => {
     return (
         <View style={styles.container}>
             <TextInput
@@ -21,11 +23,16 @@ const Search = ({ searchTerm, setSearchTerm, handleSearch, loading } : SearchPro
                 placeholder="Pesquisar nome ou ID"  />
 
             <TouchableOpacity
-                disabled={loading}
+                disabled={loading || (hasOfflineSearchFailed && !isConnected)}
                 style={styles.searchButton}
                 onPress={() => handleSearch(searchTerm)}
             >
-                { loading ? <ActivityIndicator /> : <SearchIcon color={colors.surface} />}
+                { loading
+                    ? <ActivityIndicator />
+                    : hasOfflineSearchFailed && isConnected
+                    ? <Text style={{color: colors.surface}}>Atualizar pesquisa</Text>
+                    : <SearchIcon color={colors.surface} />
+                }
 
             </TouchableOpacity>
         </View>

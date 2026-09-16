@@ -18,6 +18,8 @@ const Home = () => {
         pokemon,
         error,
         searchTerm,
+        hasOfflineSearchFailed,
+        isConnected,
         setSearchTerm,
         handleSearch
     } = useSearchPokemonViewModel()
@@ -36,6 +38,8 @@ const Home = () => {
             <ScrollView contentContainerStyle={styles.container}>
 
                 <Search
+                    isConnected={isConnected}
+                    hasOfflineSearchFailed={hasOfflineSearchFailed}
                     loading={loading}
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
