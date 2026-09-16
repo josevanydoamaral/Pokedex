@@ -5,7 +5,7 @@ import * as Crypto from 'expo-crypto';
 import type {PhotoRecord, Status} from "../../../../shared/models/PhotoRecord";
 
 export type SavePhotoRecordUsecaseResult =
-    { success: true, result: PhotoRecord } |
+    { success: true, result: PhotoRecord | void } |
     { success: false, errorMessage: string };
 
 export class SavePhotoRecordUsecase {
@@ -22,17 +22,30 @@ export class SavePhotoRecordUsecase {
         try {
             const uri = await this.storage.save(photoRecordDTO.capturedPhotoUri, photoRecordName);
 
-            const payload = {
-                id: Crypto.randomUUID(),
-                pokemon: photoRecordDTO.pokemon,
-                capturedPhotoUri: uri,
-                isFavorite: true,
-                creationDate: new Date().toISOString(),
-                status: 'pending' as Status,
-            }
+            const records = await this.repository.findAll();
+            const index = records.findIndex(r => r.pokemon.id === photoRecordDTO.pokemon.id);
 
-            const photoRecord = await this.repository.save(payload)
-            return { success: true, result: photoRecord }
+            if (index === -1) {
+                const payload = {
+                    id: Crypto.randomUUID(),
+                    pokemon: photoRecordDTO.pokemon,
+                    capturedPhotoUri: uri,
+                    isFavorite: true,
+                    creationDate: new Date().toISOString(),
+                    status: 'pending' as Status,
+                }
+
+                const photoRecord = await this.repository.save(payload)
+                return { success: true, result: photoRecord }
+
+            } else {
+                const record = records[index];
+                if (record.capturedPhotoUri) await this.storage.delete(record.capturedPhotoUri);
+                record.capturedPhotoUri = uri
+
+                const photoRecord = await this.repository.update(record.id, record)
+                return { success: true, result: photoRecord }
+            }
 
         } catch (error) {
             return { success: false, errorMessage: error instanceof Error ? error.message : "Algo correu mal. Tente novamente" }
