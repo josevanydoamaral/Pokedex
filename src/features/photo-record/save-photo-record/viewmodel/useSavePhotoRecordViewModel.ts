@@ -4,7 +4,7 @@ import {useState} from "react";
 import {Pokemon} from "../../../../shared/models/Pokemon";
 import {launchCameraAsync, requestCameraPermissionsAsync} from "expo-image-picker";
 import {useNavigation} from "@react-navigation/native";
-import {Alert} from "react-native";
+import {Alert, Linking} from "react-native";
 
 const useSavePhotoRecordViewModel = (usecase: SavePhotoRecordUsecase = savePhotoRecordUsecase) => {
     const navigation = useNavigation();
@@ -34,7 +34,19 @@ const useSavePhotoRecordViewModel = (usecase: SavePhotoRecordUsecase = savePhoto
             const permission = await requestCameraPermissionsAsync();
 
             if (!permission.granted) {
-                setErrorMessage("É necessário permitir o acesso à câmera para tirar fotos.")
+                if (!permission.canAskAgain) {
+                    Alert.alert(
+                        'Permissão negada',
+                        'Para poder tirar a foto, precisa dar permissão a câmera',
+                        [
+                            { text: 'Não permitir', style: 'cancel' },
+                            { text: 'Permitir', onPress: () => Linking.openSettings() }
+                        ]
+                    )
+                    return;
+                }
+
+                setErrorMessage("Permissão negada.")
                 setIsLoading(false);
                 return;
             }
@@ -77,6 +89,7 @@ const useSavePhotoRecordViewModel = (usecase: SavePhotoRecordUsecase = savePhoto
                 text: 'OK',
                 onPress: () => navigation.navigate('Home')}
             ]);
+            return;
 
         } else {
             setErrorMessage(result.errorMessage);
