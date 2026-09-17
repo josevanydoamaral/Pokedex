@@ -9,6 +9,7 @@ import Search from "../../../pokemon/search-pokemon/view/components/Search";
 import FavCard from "../../../pokemon/search-pokemon/view/components/FavCard";
 import SearchResultCard from "../../../pokemon/search-pokemon/view/components/SearchResultCard";
 import useFavoritesViewModel from "../../../photo-record/manage-favorites/viewmodel/UseFavoritesViewModel";
+import UseSyncRecordsViewModel from "../../../sync/sync-records/viewModel/UseSyncRecordsViewModel";
 
 const Home = () => {
     const insets = useSafeAreaInsets();
@@ -27,13 +28,17 @@ const Home = () => {
     const {
         handleDelete,
         photoRecord,
-        isLoading,
         errorMessage
     } = useFavoritesViewModel()
 
+    const {
+        syncing,
+        handleSync
+    } = UseSyncRecordsViewModel()
+
     return (
         <View style={{ flex: 1, gap: spacing.lg }}>
-            <Header/>
+            <Header isSyncing={syncing} onSync={handleSync}/>
 
             <ScrollView contentContainerStyle={styles.container}>
 

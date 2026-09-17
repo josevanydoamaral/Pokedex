@@ -69,9 +69,9 @@ export class AsyncStoragePhotoRecordRepository implements IPhotoRecordRepository
     async findPending(): Promise<PhotoRecord[]> {
         try {
             const records = await this.findAll();
-            return records.filter(r => r.status === 'pending');
+            return records.filter(r => r.status === 'pending' || r.status === 'error');
         } catch (e) {
-            throw new Error("Erro ao encotrar registos por sincronizar")
+            throw new Error("Erro ao encontrar registos por sincronizar")
         }
     }
 
