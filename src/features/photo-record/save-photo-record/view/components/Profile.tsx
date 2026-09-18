@@ -20,18 +20,20 @@ const Profile = ( { pokemon }: PokemonProps) => {
                         : <View style={[styles.sprite, { backgroundColor: colors.pokemonTypes[pokemon.kinds[0]]}]} />
                 }
 
-                <Badge kinds={pokemon.kinds} />
+                <View style={{flexDirection: "row", gap: spacing.xs}}>
+                    <Badge kinds={pokemon.kinds} />
 
+                </View>
 
             </View>
 
             <View style={styles.specs}>
-                <View>
+                <View style={{flex:1, flexShrink:1, alignItems: "center"}}>
                     <Text style={styles.specText}>Altura</Text>
                     <Text style={styles.specValue}>{pokemon.height}m</Text>
                 </View>
 
-                <View>
+                <View style={{flex: 1, flexShrink: 1, alignItems: "center"}}>
                     <Text style={styles.specText}>Peso</Text>
                     <Text style={styles.specValue}>{pokemon.weight}Kg</Text>
                 </View>
@@ -42,7 +44,10 @@ const Profile = ( { pokemon }: PokemonProps) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         gap: spacing.md,
+        alignItems: "center",
+
     },
 
     profile: {
@@ -73,17 +78,20 @@ const styles = StyleSheet.create({
     },
 
     specs: {
-        justifyContent: 'space-evenly',
+        width: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: 'row',
     },
 
     specText: {
+        minWidth: 60,
         color: colors.secondaryText,
         fontSize: typography.fontSizes.default
     },
 
     specValue: {
+        minWidth: 60,
         color: colors.primaryText,
         fontWeight: typography.fontWeights.bold,
         fontSize: typography.fontSizes.default

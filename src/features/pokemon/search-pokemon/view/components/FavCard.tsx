@@ -2,7 +2,7 @@ import {Image, Pressable, StyleSheet, Text, TouchableOpacity, View} from "react-
 import {colors} from "../../../../../theme/colors";
 import {spacing} from "../../../../../theme/spacing";
 import {typography} from "../../../../../theme/typography";
-import {Heart} from "lucide-react-native";
+import {ArrowRight, Heart} from "lucide-react-native";
 import Badge from "../../../../../components/Badge";
 import {Kind, Pokemon} from "../../../../../shared/models/Pokemon";
 import {PhotoRecord} from "../../../../../shared/models/PhotoRecord";
@@ -50,6 +50,7 @@ const FavCard = ({ photoRecord, onDelete }: CardProps) => {
 
                 <TouchableOpacity style={styles.viewImageButton} onPress={() => navigation.navigate('Details', { pokemon: rec.pokemon, photoRecordUri: rec.capturedPhotoUri })}>
                     <Text style={styles.viewImageButtonText}>Ver Imagem</Text>
+                    <ArrowRight color={colors.surface} />
                 </TouchableOpacity>
             </View>
         ))
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
 
     viewImageButton: {
         textAlign: 'center',
-        width: '90%',
+        width: '100%',
         alignSelf: 'center',
         backgroundColor: colors.primary,
         alignItems: "center",
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     },
 
     viewImageButtonText: {
+        flex: 1,
         margin: "auto",
         color: colors.surface,
         fontSize: typography.fontSizes.default,

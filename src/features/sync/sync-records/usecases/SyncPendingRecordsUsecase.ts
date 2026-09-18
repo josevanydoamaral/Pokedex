@@ -9,7 +9,7 @@ export class SyncPendingRecordsUsecase {
     constructor(private syncService: ISyncPendingRecordsRepository, private offlineStorage: IPhotoRecordRepository) {}
 
     async execute(): Promise<SyncPendingRecordsUsecaseResult> {
-        if (this.isRunning) return {success: true, message: 'Demasiadas chamadas de sincronização'};
+        if (this.isRunning) return {success: false, message: 'Demasiadas chamadas de sincronização'};
 
         this.isRunning = true;
 

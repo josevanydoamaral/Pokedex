@@ -1,6 +1,7 @@
 export type Kind = 
-'fire' | 'water' | 'grass' | 'electric' | 
-'normal' | 'poison' | 'flying' | 'rock'
+    'fire' | 'water' | 'grass' | 'electric' |
+    'normal' | 'poison' | 'flying' | 'rock' | 'bug' | 'dark' |
+    'dragon' | 'fairy' | 'fighting' | 'ghost' | 'ground' | 'ice' | 'psychic' | 'steel'
 
 export interface Pokemon {
     id: number;

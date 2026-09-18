@@ -9,7 +9,6 @@ export class PokemonApiRepository implements IPokemonRepository {
 
         const    response = await fetch(url);
 
-
         if (!response.ok) {
             if (response.status === 404) {
                 return null;

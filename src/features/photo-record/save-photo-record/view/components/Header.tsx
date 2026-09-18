@@ -17,9 +17,9 @@ const Header = ( { name, id }: HeaderProps) => {
 
     const insets = useSafeAreaInsets();
     return (
-        <View style={[styles.container, {paddingTop: insets.top}]}>
+        <View style={[styles.container, {paddingTop: insets.top * 1.5}]}>
             <Pressable onPress={navigation.goBack}>
-                <ArrowLeft size={20} color={colors.background} />
+                <ArrowLeft size={30} color={colors.background} />
             </Pressable>
 
             <Text style={styles.pokemonName}>{ name }</Text>

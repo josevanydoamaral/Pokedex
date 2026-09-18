@@ -19,8 +19,6 @@ export class SearchPokemonUsecase {
             if (result === null) {
                 return { success: false, errorMessage: "Pokemon não encontrado." };
             }
-
-            console.log(result);
             return { success: true, result: result };
 
         } catch(error) {

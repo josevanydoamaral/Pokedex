@@ -66,9 +66,6 @@ const PokemonDetail = ({ route }: Props) => {
                         <Text style={styles.favoriteButtonText}>Favoritar</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.deleteButton}>
-                        <Text style={styles.deleteButtonText}>Excluir</Text>
-                    </TouchableOpacity>
                 </View>
             )}
 
@@ -83,6 +80,7 @@ const styles = StyleSheet.create({
 
     container: {
         flexGrow: 1,
+        paddingHorizontal: spacing.xs,
         backgroundColor: colors.surface,
         gap: spacing.lg,
     },
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
 
     favoriteButton: {
         justifyContent: 'center',
-        width: '40%',
+        width: '90%',
         height: 40,
         backgroundColor: colors.primary,
         paddingHorizontal: 8,

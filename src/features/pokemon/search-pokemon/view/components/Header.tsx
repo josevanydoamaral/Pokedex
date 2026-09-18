@@ -21,7 +21,7 @@ const Header = ({ isSyncing, onSync } : HeaderProps) => {
     const insets = useSafeAreaInsets();
 
     return (
-        <View style={[styles.container, {paddingTop: insets.top}]}>
+        <View style={[styles.container, {paddingTop: insets.top * 1.5}]}>
             <Text style={styles.appTitle}>Pokedex</Text>
 
             <View style={{ flexDirection: 'row', gap: spacing.md, alignItems: 'center' }}>

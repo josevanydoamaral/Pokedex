@@ -53,9 +53,11 @@ const useSavePhotoRecordViewModel = (usecase: SavePhotoRecordUsecase = savePhoto
 
 
             const result = await launchCameraAsync({
+                aspect: [4, 3],
                 allowsEditing: true,
                 mediaTypes: ['images'],
                 quality: 0.7,
+
             })
 
 

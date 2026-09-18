@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from "react-native";
 import {colors} from "../theme/colors";
 import {typography} from "../theme/typography";
 import {Kind} from "../shared/models/Pokemon";
+import {spacing} from "../theme/spacing";
 
 interface BadgeProps {
     kinds: Array<Kind>;
@@ -23,15 +24,15 @@ const styles = StyleSheet.create({
     badge: {
         backgroundColor: colors.pokemonTypes.electric,
         width: 80,
-        height: 20,
+        height: 25,
         borderRadius: 10,
-
     },
 
     badgeText: {
         textAlign: 'center',
         color: colors.primaryText,
-        fontWeight: typography.fontWeights.semibold
+        fontWeight: typography.fontWeights.semibold,
+        fontSize: typography.fontSizes.caption
     },
 })
 export default Badge

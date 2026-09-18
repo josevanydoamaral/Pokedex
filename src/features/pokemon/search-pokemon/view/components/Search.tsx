@@ -20,7 +20,9 @@ const Search = ({ searchTerm, setSearchTerm, handleSearch, loading, hasOfflineSe
                 value={searchTerm}
                 onChangeText={setSearchTerm}
                 style={styles.searchBar}
-                placeholder="Pesquisar nome ou ID"  />
+                placeholder="Pesquisar nome ou ID"
+                placeholderTextColor={colors.secondaryText}
+            />
 
             <TouchableOpacity
                 disabled={loading || (hasOfflineSearchFailed && !isConnected)}
@@ -54,10 +56,12 @@ const styles = StyleSheet.create({
     },
 
     searchBar: {
+        flexGrow: 2,
         fontSize: typography.fontSizes.default,
     },
 
     searchButton: {
+
         padding: spacing.sm,
         borderRadius: 14,
         backgroundColor: colors.primary,

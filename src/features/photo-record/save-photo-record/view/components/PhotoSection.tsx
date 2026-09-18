@@ -17,17 +17,14 @@ const PhotoSection = ({ takePhoto, capturedPhotoUri }: PhotoSectionProps) => {
 
           <View style={styles.cameraSection}>
               { capturedPhotoUri
-                  ? <Image source={{ uri: capturedPhotoUri }} style={{width: '100%', height: '100%'}} />
+                  ? <Image resizeMode="cover" source={{ uri: capturedPhotoUri }} style={{width: '100%', height: '100%'}} />
 
-                  : <Pressable onPress={takePhoto}>
+                  : <Pressable onPress={takePhoto} style={{alignItems: "center"}}>
                       <Camera size={30} color={colors.secondaryText} />
                       <Text style={styles.cameraSectionText}>Tirar Foto</Text>
                   </Pressable>
 
-
-
               }
-
           </View>
 
       </View>
@@ -43,18 +40,17 @@ const styles = StyleSheet.create({
 
     title: {
         alignSelf: "baseline",
-        marginStart: spacing.lg,
+        marginStart: spacing.xs,
         color: colors.secondaryText,
         fontSize: typography.fontSizes.subtitle,
         fontWeight: typography.fontWeights.semibold,
     },
 
     cameraSection: {
-        width: "90%",
+        width: "100%",
         height: 400,
         alignItems: "center",
         justifyContent: "center",
-        paddingVertical: spacing.lg,
         gap: spacing.sm,
         backgroundColor: colors.background,
         borderWidth: 1,
