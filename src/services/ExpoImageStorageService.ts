@@ -13,8 +13,6 @@ export class ExpoImageStorageService implements IImageStorageService {
                 folder.create();
             }
 
-
-
             const finalFile = new File(folder, name + '.jpg');
 
             const file = new File(uri);
